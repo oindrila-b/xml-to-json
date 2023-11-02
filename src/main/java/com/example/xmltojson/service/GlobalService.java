@@ -29,7 +29,7 @@ public class GlobalService {
     private ObjectToJSONConverter jsonConverter = new ObjectToJSONConverter();
 
     public JsonObject convertXMLToJSON(String filepath, Map<String, String> xmlToJsonPropertyMap) throws Exception {
-        LOGGER.info("Received Filepath {} and amlToJSONPropertyMap {}", filepath, xmlToJsonPropertyMap);
+        LOGGER.info("Received Filepath {} and amlToJSONPropertyMap {}", filepath, xmlToJsonPropertyMap.remove(filepath));
         readEvent(filepath);
         persistAllRecordings(this.recordingList);
        return  convertToJSON(retrieveAllRecordings(), xmlToJsonPropertyMap);

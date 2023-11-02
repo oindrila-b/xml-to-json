@@ -16,7 +16,6 @@ public class ObjectToJSONConverter {
         LOGGER.info("Retrieved list {}, to be converted to JSON", recordingList);
         JsonObject recordingsArrayObject = new JsonObject();
         JsonArray recordingsArray = new JsonArray();
-        xmlToJsonPropertyMap.remove("filename");
         Set<String> keys = xmlToJsonPropertyMap.keySet();
         LOGGER.info("XML To JSON map Key Set {}", keys);
         if (!recordingList.isEmpty()) {
@@ -33,6 +32,8 @@ public class ObjectToJSONConverter {
                             array.add(artist);
                         }else if(k.contains("LOCAL-ID")){
                             jsonObject.addProperty(xmlToJsonPropertyMap.get(k), recording.getRecordingId());
+                        } else{
+                            LOGGER.warn("XML Tag doesn't exist!!! Couldn't map property");
                         }
                     }
                     jsonObject.add("Main Artist", array);
