@@ -28,10 +28,10 @@ test the application with Postman :  <br> <br>
 - Add your filepath as the first query parameter: <br> 
 &nbsp; &nbsp; &nbsp; For example : If the filepath is `C/user/downloads/myXml.xml`  then the whole request URL would look like : 
 `localhost:8080/api/v1/getJSON?filepath=C/user/downloads/myXML.xml`
-<br>
 - Next add the XML tags and the Names you'd want the JSON objects to have. For Example : <br><br> If you'd like your Recording's title property to be called recordingTitle, then pass in the value like this : `RECORDING-TITLE-COLLECTING-SOCIETY=recordingTitle`
-- Not that it will only be able to map with values if the Tag exists in the XML file. The entire URL would look something like this :
-<br> <br> `localhost:8080/api/v1/getJSON?filepath=C/user/downloads/myXml.xmll&RECORDING-TITLE-COLLECTING-SOCIETY=recordingTitle&MAIN-ARTIST-NAME-COLLECTING-SOCIETY=Artist`
+- Note that it will only be able to map with values if the Tag exists in the XML file. The entire URL would look something like this :
 
+ `localhost:8080/api/v1/getJSON?filepath=C/user/downloads/myXml.xmll&RECORDING-TITLE-COLLECTING-SOCIETY=recordingTitle&MAIN-ARTIST-NAME-COLLECTING-SOCIETY=Artist`
 
->> {"Recordings":[{"Title":"PRAVI 2017","Main Artist":[{"Artist":"JANA"}]},{"Title":"DOWN 2011","Main Artist":[{"Artist":"JAY SEAN"}]}]}
+<br><br>
+> {"Recordings":[{"Title":"PRAVI 2017","Main Artist":[{"Artist":"JANA"}]},{"Title":"DOWN 2011","Main Artist":[{"Artist":"JAY SEAN"}]}]}
