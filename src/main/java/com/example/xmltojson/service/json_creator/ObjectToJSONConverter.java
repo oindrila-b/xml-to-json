@@ -22,12 +22,19 @@ public class ObjectToJSONConverter {
         if (!recordingList.isEmpty()) {
             for (Recording recording : recordingList) {
                 JsonObject jsonObject = new JsonObject();
+                JsonArray array = new JsonArray();
+                JsonObject artist = new JsonObject();
                 try {
-                    jsonObject.addProperty("Title", recording.getRecordingTitle().toUpperCase());
-                    JsonArray array = new JsonArray();
-                    JsonObject artist = new JsonObject();
-                    artist.addProperty("Artist", recording.getMainArtists().get(0));
-                    array.add(artist);
+                    for (String k: keys) {
+                        if (k.contains("TITLE")) {
+                            jsonObject.addProperty(xmlToJsonPropertyMap.get(k), recording.getRecordingTitle().toUpperCase());
+                        } else if (k.contains("NAME")) {
+                            artist.addProperty(xmlToJsonPropertyMap.get(k), recording.getMainArtists().get(0));
+                            array.add(artist);
+                        }else if(k.contains("LOCAL-ID")){
+                            jsonObject.addProperty(xmlToJsonPropertyMap.get(k), recording.getRecordingId());
+                        }
+                    }
                     jsonObject.add("Main Artist", array);
                 } catch (Exception e) {
                     e.printStackTrace();
