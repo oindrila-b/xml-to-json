@@ -34,4 +34,4 @@ test the application with Postman :  <br> <br>
  `localhost:8080/api/v1/getJSON?filepath=C/user/downloads/myXml.xmll&RECORDING-TITLE-COLLECTING-SOCIETY=recordingTitle&MAIN-ARTIST-NAME-COLLECTING-SOCIETY=Artist`
 
 <br><br>
-> {"Recordings":[{"Title":"PRAVI 2017","Main Artist":[{"Artist":"JANA"}]},{"Title":"DOWN 2011","Main Artist":[{"Artist":"JAY SEAN"}]}]}
+> {"Recordings":[{"Title":"PRAVI 2017","Main Artist":[{"Artist":"JANA"}]},{"Title":"DOWN 2009","Main Artist":[{"Artist":"JAY SEAN"}]}]}
