@@ -11,7 +11,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 public class XMLToObjectConverterService implements Converter{
 
-        public static final Logger LOGGER = LoggerFactory.getLogger(XMLToObjectConverterService.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(XMLToObjectConverterService.class);
         @Override
         public void marshal(Object o, HierarchicalStreamWriter hierarchicalStreamWriter, MarshallingContext marshallingContext) {
             LOGGER.info("Marshalling");

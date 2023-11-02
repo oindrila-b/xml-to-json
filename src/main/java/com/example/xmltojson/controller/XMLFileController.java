@@ -1,6 +1,7 @@
 package com.example.xmltojson.controller;
 
 import com.example.xmltojson.service.GlobalService;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,9 @@ public class XMLFileController {
 @GetMapping
     public ResponseEntity<String> getJSON(@RequestParam String filepath,
                                           @RequestParam Map<String,String> xmlJsonMap) throws Exception {
-    service.convertXMLToJSON(filepath, xmlJsonMap);
+    JsonObject response = service.convertXMLToJSON(filepath, xmlJsonMap);
     System.out.println("map"+xmlJsonMap);
-    return new ResponseEntity<>("Okay Done!",HttpStatus.OK);
+    return new ResponseEntity<>(response.toString(),HttpStatus.OK);
     }
 
 }

@@ -5,10 +5,12 @@ import com.example.xmltojson.repository.XMLRepository;
 import com.example.xmltojson.service.json_creator.ObjectToJSONConverter;
 import com.example.xmltojson.service.xml_parser.xml_converter.XMLToObjectConverterService;
 import com.example.xmltojson.service.xml_parser.xml_reader.XMLReaderService;
+import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +28,11 @@ public class GlobalService {
     private XMLReaderService reader = new XMLReaderService();
     private ObjectToJSONConverter jsonConverter = new ObjectToJSONConverter();
 
-    public void convertXMLToJSON(String filepath, Map<String,String> xmlToJsonPropertyMap) throws Exception {
+    public JsonObject convertXMLToJSON(String filepath, Map<String, String> xmlToJsonPropertyMap) throws Exception {
         LOGGER.info("Received Filepath {} and amlToJSONPropertyMap {}", filepath, xmlToJsonPropertyMap);
         readEvent(filepath);
         persistAllRecordings(this.recordingList);
-        convertToJSON(retrieveAllRecordings(),xmlToJsonPropertyMap);
+       return  convertToJSON(retrieveAllRecordings(), xmlToJsonPropertyMap);
     }
 
     public void readEvent(String filepath) throws Exception {
@@ -49,8 +51,8 @@ public class GlobalService {
     }
 
 
-    private void convertToJSON(List<Recording> recordingList,Map<String,String> xmlToJsonPropertyMap) {
-        jsonConverter.convertToJSON(recordingList,xmlToJsonPropertyMap);
+    private JsonObject convertToJSON(List<Recording> recordingList, Map<String, String> xmlToJsonPropertyMap) {
+       return jsonConverter.convertToJSON(recordingList, xmlToJsonPropertyMap);
     }
 
 

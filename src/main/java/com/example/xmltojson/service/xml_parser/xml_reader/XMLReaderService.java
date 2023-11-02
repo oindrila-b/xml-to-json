@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class XMLReaderService {
-    
+
     private List<Recording> recordingList;
 
     public XMLReaderService() {
@@ -19,9 +19,8 @@ public class XMLReaderService {
     }
 
 
-
     public List<Recording> readEvent(String resourcePath) throws Exception {
-        
+
         XMLAssetInitializerService assetInitializer = new XMLAssetInitializerService();
         Resource resource = processFilepathAndGetResource(resourcePath);
         StaxEventItemReader<Recording> reader = assetInitializer.getEventItemReader(resource);

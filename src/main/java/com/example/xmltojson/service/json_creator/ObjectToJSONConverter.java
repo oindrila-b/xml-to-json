@@ -13,28 +13,32 @@ import java.util.Set;
 public class ObjectToJSONConverter {
     public static final Logger LOGGER = LoggerFactory.getLogger(ObjectToJSONConverter.class);
 
-    public void convertToJSON(List<Recording> recordingList, Map<String,String> xmlToJsonPropertyMap ) {
+    public JsonObject convertToJSON(List<Recording> recordingList, Map<String, String> xmlToJsonPropertyMap) {
         LOGGER.info("Retrieved list {}, to be converted to JSON", recordingList);
+        JsonObject recordingsArrayObject = new JsonObject();
+        JsonArray recordingsArray = new JsonArray();
         xmlToJsonPropertyMap.remove("filename");
         Set<String> keys = xmlToJsonPropertyMap.keySet();
         LOGGER.info("XML To JSON map Key Set {}", keys);
         if (!recordingList.isEmpty()) {
-            for (Recording recording: recordingList) {
+            for (Recording recording : recordingList) {
                 JsonObject jsonObject = new JsonObject();
-                try{
-
+                try {
                     jsonObject.addProperty("Title", recording.getRecordingTitle().toUpperCase());
                     JsonArray array = new JsonArray();
                     JsonObject artist = new JsonObject();
                     artist.addProperty("Artist", recording.getMainArtists().get(0));
                     array.add(artist);
                     jsonObject.add("Main Artist", array);
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 System.out.println(jsonObject);
+                recordingsArray.add(jsonObject);
             }
+            recordingsArrayObject.add("Recordings", recordingsArray);
         }
+        return recordingsArrayObject;
     }
 }
 
