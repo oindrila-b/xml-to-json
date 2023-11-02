@@ -9,8 +9,6 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
-import java.util.ArrayList;
-
 public class XMLToObjectConverterService implements Converter{
 
         public static final Logger LOGGER = LoggerFactory.getLogger(XMLToObjectConverterService.class);
@@ -25,14 +23,13 @@ public class XMLToObjectConverterService implements Converter{
             while (hierarchicalStreamReader.hasMoreChildren()) {
                 hierarchicalStreamReader.moveDown();
                 if (hierarchicalStreamReader.hasMoreChildren()) {
-                    //    System.out.println("Has more children");
                     hierarchicalStreamReader.moveDown();
                     if (hierarchicalStreamReader.hasMoreChildren()) {
-                        //       System.out.println("Has nested children");
                         hierarchicalStreamReader.moveDown();
                         System.out.println(hierarchicalStreamReader.getValue());
                         if (hierarchicalStreamReader.getNodeName().contains("MAIN-ARTIST-NAME-COLLECTING")) {
                             recording.addArtist(hierarchicalStreamReader.getValue());
+                            LOGGER.info("XML Tag : {} => {}", hierarchicalStreamReader.getNodeName(),hierarchicalStreamReader.getValue());
                         }
                         hierarchicalStreamReader.moveUp();
                     }else {
@@ -43,8 +40,10 @@ public class XMLToObjectConverterService implements Converter{
                     System.out.println(hierarchicalStreamReader.getValue());
                     if (hierarchicalStreamReader.getNodeName().contains("RECORDING-LOCAL-ID")){
                         recording.setRecordingId(hierarchicalStreamReader.getValue());
+                        LOGGER.info("XML Tag : {} => {}", hierarchicalStreamReader.getNodeName(),hierarchicalStreamReader.getValue());
                     } else {
                         recording.setRecordingTitle(hierarchicalStreamReader.getValue());
+                        LOGGER.info("XML Tag : {} => {}", hierarchicalStreamReader.getNodeName(),hierarchicalStreamReader.getValue());
                     }
                 }
                 hierarchicalStreamReader.moveUp();
@@ -54,6 +53,7 @@ public class XMLToObjectConverterService implements Converter{
 
         @Override
         public boolean canConvert(Class aClass) {
+            LOGGER.info("Can Convert the class");
             return aClass.equals(Recording.class);
         }
     }

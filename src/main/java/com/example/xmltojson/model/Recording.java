@@ -21,7 +21,7 @@ public class Recording {
         if (mainArtists == null) {
             mainArtists = new ArrayList<>();
         }
-        mainArtists.add(artist);
+        mainArtists.add(artist.toUpperCase());
     }
 
     @Override

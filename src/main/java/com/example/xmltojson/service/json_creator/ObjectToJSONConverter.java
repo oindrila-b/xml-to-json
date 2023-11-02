@@ -1,28 +1,40 @@
 package com.example.xmltojson.service.json_creator;
 
 import com.example.xmltojson.model.Recording;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ObjectToJSONConverter {
+    public static final Logger LOGGER = LoggerFactory.getLogger(ObjectToJSONConverter.class);
 
-    public void convertToJSON(List<Recording> recordingList) {
-        System.out.println("List" + recordingList);
-//        System.out.println("CONVERTING TO JSON");
-//        if (!recordingList.isEmpty()) {
-//            for (Recording recording: recordingList) {
-//                JsonObject jsonObject = new JsonObject();
-//                try{
-//                    jsonObject.addProperty("Title", recording.getRecordingTitle());
-//                    jsonObject.addProperty("Artist", recording.getMainArtists().toString());
-//                } catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//                System.out.println(jsonObject);
-//            }
-//        }
+    public void convertToJSON(List<Recording> recordingList, Map<String,String> xmlToJsonPropertyMap ) {
+        LOGGER.info("Retrieved list {}, to be converted to JSON", recordingList);
+        xmlToJsonPropertyMap.remove("filename");
+        Set<String> keys = xmlToJsonPropertyMap.keySet();
+        LOGGER.info("XML To JSON map Key Set {}", keys);
+        if (!recordingList.isEmpty()) {
+            for (Recording recording: recordingList) {
+                JsonObject jsonObject = new JsonObject();
+                try{
+
+                    jsonObject.addProperty("Title", recording.getRecordingTitle().toUpperCase());
+                    JsonArray array = new JsonArray();
+                    JsonObject artist = new JsonObject();
+                    artist.addProperty("Artist", recording.getMainArtists().get(0));
+                    array.add(artist);
+                    jsonObject.add("Main Artist", array);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+                System.out.println(jsonObject);
+            }
+        }
     }
 }
 
