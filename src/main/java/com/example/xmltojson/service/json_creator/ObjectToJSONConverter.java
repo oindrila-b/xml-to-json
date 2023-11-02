@@ -43,6 +43,7 @@ public class ObjectToJSONConverter {
                 recordingsArray.add(jsonObject);
             }
             recordingsArrayObject.add("Recordings", recordingsArray);
+            LOGGER.info("Recordings Obtained : {}", recordingsArrayObject);
         }
         return recordingsArrayObject;
     }
