@@ -11,7 +11,9 @@ import org.springframework.core.io.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+/***
+ *  Reads the XML from the given filepath. And returns a list of Recording List.
+ * **/
 public class XMLReaderService {
 
     private List<Recording> recordingList;
@@ -22,6 +24,11 @@ public class XMLReaderService {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(XMLReaderService.class);
 
+    /*****
+     *  Reads the XML file. If it finds events, then it reads that events and converts
+     *  them into a Recording object.
+     * @param resourcePath
+     * **/
     public List<Recording> readEvent(String resourcePath) throws Exception {
 
         XMLAssetInitializerService assetInitializer = new XMLAssetInitializerService();
@@ -44,6 +51,10 @@ public class XMLReaderService {
         return recordingList;
     }
 
+    /****
+     *  Processes a given filepath value and returns it as a Byte Array resource from the file.
+     * @param filepath
+     * **/
     private Resource processFilepathAndGetResource(String filepath) throws IOException {
         Resource resource;
         resource = new ByteArrayResource(new FileSystemResource(filepath).getContentAsByteArray());

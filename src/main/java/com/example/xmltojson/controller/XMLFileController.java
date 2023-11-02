@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
-
+/****
+ *  The Controller Layer that returns the JSON data read from the XML file.
+ * **/
 @RestController
 @RequestMapping("api/v1/getJSON")
 public class XMLFileController {
@@ -19,7 +20,12 @@ public class XMLFileController {
 
     @Autowired
     GlobalService service;
-
+/****
+ *  The method that returns the JSON Object.
+ * @param filepath
+ * @param xmlJsonMap
+ * @return  ResponseEntity
+ * **/
 @GetMapping
     public ResponseEntity<String> getJSON(@RequestParam String filepath,
                                           @RequestParam Map<String,String> xmlJsonMap) throws Exception {

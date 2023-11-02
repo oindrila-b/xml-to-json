@@ -8,6 +8,11 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+/****
+ *  The Recording Model that is persisted in the database,
+ *  after being populated through the XML reader.
+ * **/
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,6 +23,10 @@ public class Recording {
     private String recordingTitle;
     private List<String> mainArtists;
 
+    /***
+     *  Adds an artist to the List of main artists.
+     * @param artist
+     * **/
     public void addArtist(String artist) {
         if (mainArtists == null) {
             mainArtists = new ArrayList<>();

@@ -9,9 +9,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/*****
+ *  Converts a List of Recording objects to a JSONArray of JsonObjects.
+ * **/
+
 public class ObjectToJSONConverter {
     public static final Logger LOGGER = LoggerFactory.getLogger(ObjectToJSONConverter.class);
 
+    /****
+     *  Converts the List o Recordings into a JSONArray of recordings.
+     *  Uses the xmlToJsonPropertyMap, to set the JSON properties.
+     * @param recordingList
+     * @param xmlToJsonPropertyMap
+     * @return JsonObject
+     * **/
     public JsonObject convertToJSON(List<Recording> recordingList, Map<String, String> xmlToJsonPropertyMap) {
         LOGGER.info("Retrieved list {}, to be converted to JSON", recordingList);
         JsonObject recordingsArrayObject = new JsonObject();

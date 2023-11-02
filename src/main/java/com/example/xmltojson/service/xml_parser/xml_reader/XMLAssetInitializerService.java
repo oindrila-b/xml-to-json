@@ -12,13 +12,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/****
+ *  Initializes all the necessary assets that are uses to read and XML file.
+ *  This includes an event item reader as well as an Unmarshaller.
+ * **/
 public class XMLAssetInitializerService {
     private XStreamMarshaller unmarshaller;
     private StaxEventItemReader<Recording> xmlEventReader;
 
+    /****
+     *  This creates and returns an Event Item Reader for reading the XML file.
+     * @param resource
+     * **/
     public StaxEventItemReader<Recording> getEventItemReader(Resource resource){
         xmlEventReader = new StaxEventItemReader<>();
-        xmlEventReader.setUnmarshaller(getUnMarshallar());
+        xmlEventReader.setUnmarshaller(getUnmarshaller());
         xmlEventReader.setResource(resource);
         xmlEventReader.setFragmentRootElementNames(new String[] {"RECORDING"});
         xmlEventReader.open(new ExecutionContext());
@@ -26,7 +34,11 @@ public class XMLAssetInitializerService {
         return  xmlEventReader;
     }
 
-    private XStreamMarshaller getUnMarshallar() {
+    /***
+     * This creates and  returns an Unmarshaller for
+     * the ItemReader to convert the XML fragments to Recording objects.
+     * **/
+    private XStreamMarshaller getUnmarshaller() {
 
         Map<String,Class> aliases = new HashMap<>();
         aliases.put("RECORDING",Recording.class);
