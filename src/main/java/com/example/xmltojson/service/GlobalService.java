@@ -35,10 +35,10 @@ public class GlobalService {
        return  convertToJSON(retrieveAllRecordings(), xmlToJsonPropertyMap);
     }
 
-    public void readEvent(String filepath) throws Exception {
+    private void readEvent(String filepath) throws Exception {
         this.recordingList = new ArrayList<>();
         this.recordingList = reader.readEvent(filepath);
-        LOGGER.info("");
+        LOGGER.info("XML extracted attributes {} ", recordingList);
     }
 
     private void persistAllRecordings(List<Recording> recordingList) {
@@ -46,7 +46,6 @@ public class GlobalService {
     }
 
     private List<Recording> retrieveAllRecordings() {
-
         return repository.findAll();
     }
 

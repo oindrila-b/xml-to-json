@@ -1,6 +1,8 @@
 package com.example.xmltojson.service.xml_parser.xml_reader;
 
 import com.example.xmltojson.model.Recording;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.xml.StaxEventItemReader;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
@@ -18,6 +20,7 @@ public class XMLReaderService {
         recordingList = new ArrayList<>();
     }
 
+    public static final Logger LOGGER = LoggerFactory.getLogger(XMLReaderService.class);
 
     public List<Recording> readEvent(String resourcePath) throws Exception {
 
@@ -30,14 +33,11 @@ public class XMLReaderService {
         Recording recording = null;
 
         while (hasNext) {
-            System.out.println(".....");
             recording = reader.read();
             if (recording == null) {
-                System.out.println(".....");
                 hasNext = false;
             } else {
-                System.out.println("<<.....>>");
-                System.out.println(recording);
+                LOGGER.info("Recording from the event: {}", recording);
                 recordingList.add(recording);
             }
         }

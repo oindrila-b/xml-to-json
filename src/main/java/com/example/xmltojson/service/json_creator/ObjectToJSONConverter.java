@@ -5,7 +5,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -33,7 +32,7 @@ public class ObjectToJSONConverter {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                System.out.println(jsonObject);
+                LOGGER.info("JSON Object from the Recording Object {} ", jsonObject);
                 recordingsArray.add(jsonObject);
             }
             recordingsArrayObject.add("Recordings", recordingsArray);
